@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will Ross | Home</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<header class="glass header">
+  <h1 class="logo">Will Ross</h1>
+
+  <nav class="nav-links" aria-label="Main">
+    <a href="index.html" class="active"><i class="fas fa-home"></i> <span>Home</span></a>
+    <a href="projects.html"><i class="fas fa-code"></i> <span>Projects</span></a>
+    <a href="ctf.html"><i class="fas fa-flag"></i> <span>CTFs</span></a>
+    <a href="blog.html"><i class="fas fa-pen"></i> <span>Blog</span></a>
+    <a href="work.html"><i class="fas fa-briefcase"></i> <span>Work</span></a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> <span>Contact</span></a>
+  </nav>
+
+  <div class="icons">
+    <a href="https://github.com/YOURUSERNAME" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://linkedin.com/in/YOURUSERNAME" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <button id="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="mobile-menu glass" hidden>
+  <a href="index.html" class="active"><i class="fas fa-home"></i> <span>Home</span></a>
+  <a href="projects.html"><i class="fas fa-code"></i> <span>Projects</span></a>
+  <a href="ctf.html"><i class="fas fa-flag"></i> <span>CTFs</span></a>
+  <a href="blog.html"><i class="fas fa-pen"></i> <span>Blog</span></a>
+  <a href="work.html"><i class="fas fa-briefcase"></i> <span>Work</span></a>
+  <a href="contact.html"><i class="fas fa-envelope"></i> <span>Contact</span></a>
+</div>
+
+<main>
+
+  <!-- ABOUT ME -->
+  <section class="glass about">
+    <div class="about-text">
+      <h2>Hi, I’m <span class="grad">Will Ross</span></h2>
+      <p>
+        I’m a SOC Analyst, Security Engineer, and Software Engineer who loves solving complex problems,
+        building security tools, and competing in Capture The Flag events.
+      </p>
+      <p>
+        Currently interning at <strong>Kyndryl</strong> in Security & Resiliency,  
+        and studying <strong>Software Engineering</strong> at UNB.
+      </p>
+    </div>
+    <div class="about-img">
+      <img src="images/me.png" alt="Will Ross" onerror="this.src='https://placehold.co/400x400?text=Will+Ross';" />
+    </div>
+  </section>
+
+  <!-- FUN FACTS -->
+  <section class="glass fun-facts">
+    <h3><i class="fas fa-lightbulb"></i> Fun Facts</h3>
+    <ul>
+      <li>🏎 Formula 1 fan — rooting for McLaren</li>
+      <li>🎯 First place at CyberSci Nationals 2025</li>
+      <li>🛠 Built a compliance automation platform in a global hackathon</li>
+      <li>🖥 Dual laptop + 34” ultrawide setup</li>
+    </ul>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="glass skills">
+    <h3><i class="fas fa-tools"></i> Tools & Frameworks</h3>
+    <div class="skill-grid">
+      <div class="skill"><i class="fab fa-python"></i> Python</div>
+      <div class="skill"><i class="fab fa-js"></i> JavaScript</div>
+      <div class="skill"><i class="fab fa-react"></i> React</div>
+      <div class="skill"><i class="fab fa-node-js"></i> Node.js</div>
+      <div class="skill"><i class="fas fa-database"></i> PostgreSQL</div>
+      <div class="skill"><i class="fab fa-linux"></i> Linux</div>
+      <div class="skill"><i class="fas fa-network-wired"></i> Networking</div>
+      <div class="skill"><i class="fas fa-flag"></i> CTF Tooling</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="glass footer">
+  <p>&copy; 2025 Will Ross</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
