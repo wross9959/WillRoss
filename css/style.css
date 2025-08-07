@@ -311,8 +311,10 @@ header { position: sticky; top: 0; z-index: 50; }
 }
 
 /* ===== Mobile nav ===== */
+
+/* ===== Mobile nav (fix) ===== */
 @media (max-width: 768px) {
-  /* Hide desktop links, show hamburger */
+  /* hide desktop links, show hamburger */
   .nav-links { display: none; }
   .hamburger {
     display: inline-flex;
@@ -326,18 +328,33 @@ header { position: sticky; top: 0; z-index: 50; }
     margin-left: 8px;
   }
 
-  /* Mobile dropdown menu */
-  .mobile-menu {
+  /* SHOW the menu on mobile when not [hidden] */
+  .mobile-menu { 
+    display: grid;         /* <-- this overrides the desktop display:none */
     position: fixed;
-    top: calc(60px + 1rem);   /* just under header (header has margin) */
+    top: 72px;             /* just under header */
     left: 0; right: 0;
     margin: 0 12px;
     padding: 8px;
     border-radius: 12px;
     z-index: 1000;
+    gap: 0.4rem;
+  }
+  .mobile-menu { 
+  transform-origin: top;
+  transform: scaleY(0.98);
+  opacity: 0;
+  max-height: 0;
+  transition: transform .18s ease, opacity .18s ease, max-height .18s ease;
+  }
+  .mobile-menu.open {
+    opacity: 1;
+    transform: scaleY(1);
+    max-height: 480px;
   }
 
-  /* Ensure [hidden] actually hides it regardless of other rules */
+
+  /* keep it hidden when attribute is present */
   .mobile-menu[hidden] { display: none !important; }
 
   .mobile-menu a {
@@ -347,8 +364,5 @@ header { position: sticky; top: 0; z-index: 50; }
     color: var(--primary-accent);
   }
   .mobile-menu a:hover,
-  .mobile-menu a.active {
-    background: var(--primary-accent);
-    color: #fff;
-  }
+  .mobile-menu a.active { background: var(--primary-accent); color: #fff; }
 }
