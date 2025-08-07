@@ -45,14 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const hamburger = document.getElementById("hamburger");
 const mobileMenu = document.getElementById("mobile-menu");
 
-function openMenu() {
-  mobileMenu.hidden = false;
-  hamburger.setAttribute("aria-expanded", "true");
-}
-function closeMenu() {
-  mobileMenu.hidden = true;
-  hamburger.setAttribute("aria-expanded", "false");
-}
 
 hamburger?.addEventListener("click", () => {
   const isOpen = hamburger.getAttribute("aria-expanded") === "true";
@@ -76,3 +68,13 @@ document.addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeMenu();
 });
+function openMenu() {
+  mobileMenu.hidden = false;
+  requestAnimationFrame(() => mobileMenu.classList.add("open"));
+  hamburger.setAttribute("aria-expanded", "true");
+}
+function closeMenu() {
+  mobileMenu.classList.remove("open");
+  hamburger.setAttribute("aria-expanded", "false");
+  setTimeout(() => { mobileMenu.hidden = true; }, 180);
+}
