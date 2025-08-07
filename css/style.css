@@ -299,22 +299,20 @@ textarea {
 /* ===== Header layout defaults ===== */
 .nav-links { display: flex; }
 .hamburger { display: none; }
-#mobile-menu { display: none; }            /* safeguard */
-header { position: sticky; top: 0; z-index: 50; }
+#mobile-menu { display: none; }            
+
+/* header { position: sticky; top: 0; z-index: 50; } */
 
 /* Gradient text helper (you use .grad on Home) */
-.grad {
+/* .grad {
   background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
+} */
 
-/* ===== Mobile nav ===== */
-
-/* ===== Mobile nav (fix) ===== */
+/* Mobile */
 @media (max-width: 768px) {
-  /* hide desktop links, show hamburger */
   .nav-links { display: none; }
   .hamburger {
     display: inline-flex;
@@ -328,41 +326,27 @@ header { position: sticky; top: 0; z-index: 50; }
     margin-left: 8px;
   }
 
-  /* SHOW the menu on mobile when not [hidden] */
-  .mobile-menu { 
-    display: grid;         /* <-- this overrides the desktop display:none */
+  /* SHOW menu when not [hidden] */
+  .mobile-menu {
+    display: grid;               /* overrides desktop none */
     position: fixed;
-    top: 72px;             /* just under header */
+    top: 72px;
     left: 0; right: 0;
     margin: 0 12px;
     padding: 8px;
     border-radius: 12px;
     z-index: 1000;
     gap: 0.4rem;
-  }
-  .mobile-menu { 
-  transform-origin: top;
-  transform: scaleY(0.98);
-  opacity: 0;
-  max-height: 0;
-  transition: transform .18s ease, opacity .18s ease, max-height .18s ease;
-  }
-  .mobile-menu.open {
-    opacity: 1;
-    transform: scaleY(1);
-    max-height: 480px;
-  }
 
+    /* optional animation (works with JS open/close) */
+    transform-origin: top;
+    transform: scaleY(0.98);
+    opacity: 0;
+    max-height: 0;
+    transition: transform .18s ease, opacity .18s ease, max-height .18s ease;
+  }
+  .mobile-menu.open { opacity: 1; transform: scaleY(1); max-height: 480px; }
 
-  /* keep it hidden when attribute is present */
+  /* keep it hidden when attribute present */
   .mobile-menu[hidden] { display: none !important; }
-
-  .mobile-menu a {
-    display: flex; align-items: center; gap: .6rem;
-    padding: .65rem .8rem;
-    border-radius: 8px;
-    color: var(--primary-accent);
-  }
-  .mobile-menu a:hover,
-  .mobile-menu a.active { background: var(--primary-accent); color: #fff; }
 }

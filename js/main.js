@@ -1,80 +1,93 @@
 // ===== Theme persistence =====
-const themeToggle = document.getElementById("theme-toggle");
-const themeIcon = themeToggle?.querySelector("i");
+var themeToggle = document.getElementById("theme-toggle");
+var themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
 
-// initialize theme from localStorage
 (function initTheme() {
-  const saved = localStorage.getItem("theme"); // 'dark' | 'light' | null
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const start = saved || (prefersDark ? "dark" : "light");
-  document.body.dataset.theme = start;
-  if (themeIcon) {
-    themeIcon.classList.toggle("fa-moon", start === "light");
-    themeIcon.classList.toggle("fa-sun", start === "dark");
-  }
+  try {
+    var saved = localStorage.getItem("theme");
+    var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var start = saved || (prefersDark ? "dark" : "light");
+    document.body.dataset.theme = start;
+    if (themeIcon) {
+      if (start === "light") { themeIcon.classList.add("fa-moon"); themeIcon.classList.remove("fa-sun"); }
+      else { themeIcon.classList.add("fa-sun"); themeIcon.classList.remove("fa-moon"); }
+    }
+  } catch(e) {}
 })();
 
-// toggle + persist
-themeToggle?.addEventListener("click", () => {
-  const darkMode = document.body.dataset.theme === "dark";
-  const next = darkMode ? "light" : "dark";
-  document.body.dataset.theme = next;
-  localStorage.setItem("theme", next);
-  if (themeIcon) {
-    themeIcon.classList.toggle("fa-moon", next === "light");
-    themeIcon.classList.toggle("fa-sun", next === "dark");
-  }
-});
+if (themeToggle) {
+  themeToggle.addEventListener("click", function () {
+    var next = document.body.dataset.theme === "dark" ? "light" : "dark";
+    document.body.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch(e) {}
+    if (themeIcon) {
+      if (next === "light") { themeIcon.classList.add("fa-moon"); themeIcon.classList.remove("fa-sun"); }
+      else { themeIcon.classList.add("fa-sun"); themeIcon.classList.remove("fa-moon"); }
+    }
+  });
+}
 
-// ===== Fade-in effect on load =====
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".glass").forEach(el => {
+// ===== Fade-in effect =====
+document.addEventListener("DOMContentLoaded", function () {
+  var glass = document.querySelectorAll(".glass");
+  for (var i = 0; i < glass.length; i++) {
+    var el = glass[i];
     el.style.opacity = 0;
     el.style.transform = "translateY(20px)";
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        el.style.transition = "all 0.6s ease";
-        el.style.opacity = 1;
-        el.style.transform = "translateY(0)";
-      }, 80);
-    });
-  });
+    (function(elRef){
+      requestAnimationFrame(function(){
+        setTimeout(function(){
+          elRef.style.transition = "all 0.6s ease";
+          elRef.style.opacity = 1;
+          elRef.style.transform = "translateY(0)";
+        }, 80);
+      });
+    })(el);
+  }
 });
 
 // ===== Mobile menu =====
-const hamburger = document.getElementById("hamburger");
-const mobileMenu = document.getElementById("mobile-menu");
+var hamburger = document.getElementById("hamburger");
+var mobileMenu = document.getElementById("mobile-menu");
 
+function openMenu() {
+  if (!mobileMenu) return;
+  mobileMenu.hidden = false;                  // show
+  // add open class if you kept the animation CSS
+  if (mobileMenu.classList) mobileMenu.classList.add("open");
+  if (hamburger) hamburger.setAttribute("aria-expanded", "true");
+}
 
-hamburger?.addEventListener("click", () => {
-  const isOpen = hamburger.getAttribute("aria-expanded") === "true";
-  isOpen ? closeMenu() : openMenu();
-});
+function closeMenu() {
+  if (!mobileMenu) return;
+  if (mobileMenu.classList) mobileMenu.classList.remove("open");
+  if (hamburger) hamburger.setAttribute("aria-expanded", "false");
+  // wait for CSS transition, then hide to remove from flow
+  setTimeout(function(){ mobileMenu.hidden = true; }, 180);
+}
 
-// close on link click
-mobileMenu?.querySelectorAll("a").forEach(a => {
-  a.addEventListener("click", () => closeMenu());
-});
+if (hamburger) {
+  hamburger.addEventListener("click", function (e) {
+    e.stopPropagation();
+    var isOpen = hamburger.getAttribute("aria-expanded") === "true";
+    if (isOpen) closeMenu(); else openMenu();
+  });
+}
 
-// close on outside click
-document.addEventListener("click", (e) => {
+if (mobileMenu) {
+  var links = mobileMenu.querySelectorAll("a");
+  for (var j = 0; j < links.length; j++) {
+    links[j].addEventListener("click", closeMenu);
+  }
+}
+
+document.addEventListener("click", function (e) {
   if (!mobileMenu || mobileMenu.hidden) return;
-  const inMenu = mobileMenu.contains(e.target);
-  const inHeader = hamburger && hamburger.contains(e.target);
-  if (!inMenu && !inHeader) closeMenu();
+  if (mobileMenu.contains(e.target)) return;           // click inside menu
+  if (hamburger && hamburger.contains(e.target)) return; // click on button
+  closeMenu();
 });
 
-// close on Escape
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") closeMenu();
 });
-function openMenu() {
-  mobileMenu.hidden = false;
-  requestAnimationFrame(() => mobileMenu.classList.add("open"));
-  hamburger.setAttribute("aria-expanded", "true");
-}
-function closeMenu() {
-  mobileMenu.classList.remove("open");
-  hamburger.setAttribute("aria-expanded", "false");
-  setTimeout(() => { mobileMenu.hidden = true; }, 180);
-}
