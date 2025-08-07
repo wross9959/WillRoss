@@ -1,7 +1,7 @@
 // ===== Theme persistence =====
 var themeToggle = document.getElementById("theme-toggle");
 var themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
-
+console.log("main.js loaded");
 (function initTheme() {
   try {
     var saved = localStorage.getItem("theme");
@@ -49,11 +49,17 @@ document.addEventListener("DOMContentLoaded", function () {
 // ===== Mobile menu =====
 var hamburger = document.getElementById("hamburger");
 var mobileMenu = document.getElementById("mobile-menu");
+var clicked = document.getElementById("clicked-indicator");
+if (hamburger) {
+  hamburger.addEventListener("click", function() {
+    console.log("hamburger clicked");
+    if (clicked) clicked.textContent = "clicked!";
+  });
+}
 
 function openMenu() {
   if (!mobileMenu) return;
-  mobileMenu.hidden = false;                  // show
-  // add open class if you kept the animation CSS
+  mobileMenu.hidden = false;          
   if (mobileMenu.classList) mobileMenu.classList.add("open");
   if (hamburger) hamburger.setAttribute("aria-expanded", "true");
 }

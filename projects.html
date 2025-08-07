@@ -18,11 +18,12 @@
     <body>
         <header class="glass header">
             <h1 class="logo">Will Ross</h1>
-            <nav>
+
+            <nav class="nav-links" aria-label="Main">
                 <a href="index.html"
                     ><i class="fas fa-home"></i> <span>Home</span></a
                 >
-                <a href="projects.html" class="active"
+                <a href="projects.html"
                     ><i class="fas fa-code"></i> <span>Projects</span></a
                 >
                 <a href="ctf.html"
@@ -38,16 +39,52 @@
                     ><i class="fas fa-envelope"></i> <span>Contact</span></a
                 >
             </nav>
+
             <div class="icons">
-                <a href="https://github.com/YOURUSERNAME" target="_blank"
+                <a
+                    href="https://github.com/wross9959"
+                    target="_blank"
+                    aria-label="GitHub"
                     ><i class="fab fa-github"></i
                 ></a>
-                <a href="https://linkedin.com/in/YOURUSERNAME" target="_blank"
+                <a
+                    href="https://linkedin.com/in/will-ross9959"
+                    target="_blank"
+                    aria-label="LinkedIn"
                     ><i class="fab fa-linkedin"></i
                 ></a>
-                <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+                <button id="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button
+                    id="hamburger"
+                    class="hamburger"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                >
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </header>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="mobile-menu" hidden>
+            <a href="index.html"
+                ><i class="fas fa-home"></i> <span>Home</span></a
+            >
+            <a href="projects.html"
+                ><i class="fas fa-code"></i> <span>Projects</span></a
+            >
+            <a href="ctf.html"><i class="fas fa-flag"></i> <span>CTFs</span></a>
+            <a href="blog.html"><i class="fas fa-pen"></i> <span>Blog</span></a>
+            <a href="work.html"
+                ><i class="fas fa-briefcase"></i> <span>Work</span></a
+            >
+            <a href="contact.html"
+                ><i class="fas fa-envelope"></i> <span>Contact</span></a
+            >
+        </div>
 
         <main>
             <section class="glass">
